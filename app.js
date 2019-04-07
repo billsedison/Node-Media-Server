@@ -1,4 +1,5 @@
 const { NodeMediaServer } = require('./index');
+const bonjour = require('bonjour')();
 
 const config = {
   rtmp: {
@@ -29,6 +30,7 @@ const config = {
   },
 };
 
+bonjour.publish({ name: 'RTMP-Server', type: 'rtmp', port: config.rtmp.port });
 
 let nms = new NodeMediaServer(config)
 nms.run();
